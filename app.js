@@ -21,6 +21,10 @@ const app = express();
 app.use(cors())
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
+app.get("/",(req,res)=>{
+  res.setHeader("Access-Control-Allow-Credentials",true);
+  res.setHeader("Access-Control-Allow-Origin: *");
+});
 app.use("/customer", CustomerRouter);
 app.use("/product", ProductRouter);
 app.use("/cart", CartRouter);
@@ -31,6 +35,7 @@ app.use("/admin", AdminRouter);
 app.use("/category", CategoryRouter);
 app.use("/order", OrderRouter);
 app.use('/wishlist', WishlistRouter);
+
 
 const publicPath = path.join(path.dirname(fileURLToPath(import.meta.url)), "public");
 app.use(express.static(publicPath));
